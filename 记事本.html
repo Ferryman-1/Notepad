@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="./css/index.css" />
+<title>记事本</title>
+</head>
+<body>
+
+<!-- 主体区域 -->
+<section id="app">
+  <!-- 输入框 -->
+  <header class="header">
+    <h1>记事本</h1>
+    <input placeholder="请输入任务" class="new-todo" v-model="todoName" @keyup="enter"/>
+    <button class="add" @click="add">添加任务</button>
+  </header>
+  <!-- 列表区域 -->
+  <section class="main">
+    <ul class="todo-list">
+      <!-- 列表渲染 -->
+      <li class="todo" v-for="(item,index) in list" :key="item.id">
+        <div class="view">
+          <!-- 显示清单，即使删除了元素，也要从1开始，所以用索引index而不用id -->
+          <span class="index">{{ index + 1 }}</span> <label>{{item.name}}</label>
+          <!-- 删除功能 -->
+          <button class="destroy" @click="del(item.id)"></button>
+        </div>
+      </li>
+    </ul>
+  </section>
+  <!-- 统计和清空 → 如果没有任务了，底部隐藏掉 → v-show(频繁切换)-->
+  <footer class="footer" v-show="list.length > 0">
+    <!-- 统计 -->
+    <span class="todo-count">合 计:<strong> {{list.length}} </strong></span>
+    <!-- 清空 -->
+    <button class="clear-completed" @click="clear">
+      清空任务
+    </button>
+  </footer>
+</section>
+
+<!-- 底部 -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  
+  const app = new Vue({
+    el: '#app',
+    data: {
+      //双向绑定model
+      todoName: '',
+      list:[
+        { id: 1, name: 'vue1小时'},
+        { id: 2, name: '英语半小时'},
+        { id: 3, name: '板绘半小时'}
+      ]
+    },
+    methods:{
+      del(id){
+        // console.log(id) => filter 保留所有不等于该 id 的项
+        this.list = this.list.filter(item => item.id !== id)
+      },
+      // 添加功能
+      // 1. 通过 v-model 绑定 输入框 → 实时获取表单元素的内容
+      // 2. 点击按钮，进行新增，往数组最后面加 push
+      add(){
+        //trim()方法去掉字符串首尾空格
+        if(this.todoName.trim() === ''){
+          alert('请输入任务名称')
+          return//立即结束当前函数
+        }
+        // 新增的清单加到最后面，格式与list一样，即有{}
+        this.list.push({
+          id: +new Date(),//时间戳
+          name: this.todoName
+        })
+        this.todoName = ''
+      },
+      clear(){
+        //覆盖数组清空列表
+        this.list = []
+      },
+      //按下回车键 Enter 键可以触发增加清单
+      enter(e){
+        if(e.key === 'Enter'){
+          //调用添加清单功能
+          this.add()
+        }
+      }
+    }
+  })
+
+</script>
+</body>
+</html>
