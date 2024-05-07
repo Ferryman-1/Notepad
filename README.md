@@ -21,7 +21,7 @@ v-show="list.length > 0"
 **v-on** 调用传参 **e** 中使得按下Enter键触发
 e.key === 'Enter'
 再调用添加任务add()方法
-## 示意图
+## 示意图：
 [![notepad](https://img.17carat.cn/2024/04/github/notepad.png "notepad")](https://img.17carat.cn/2024/04/github/notepad.png "notepad")
 
 ## 二、组件通信方法
