@@ -24,7 +24,7 @@ e.key === 'Enter'
 ## 示意图：
 [![notepad](https://img.17carat.cn/2024/04/github/notepad.png "notepad")](https://img.17carat.cn/2024/04/github/notepad.png "notepad")
 
-## 二、组件通信方法
+## 二、组件通信方法：
 ### 渲染功能
 1.提供数据 -> 提供在公共的父组件 App.vue
 2. 通过父传子传递给TodoMain
