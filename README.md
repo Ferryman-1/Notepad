@@ -1,10 +1,10 @@
 # Notepad：
-用vue框架实现的可以列出任务清单
+用vue框架实现的可以列出任务清单。
 ## 一、功能总结：
 ### ① 列表渲染：
-**v-for key** 的设置 {{ }} 插值表达式
+**v-for key** 的设置 {{ }} 插值表达式。
 ### ② 删除功能：
-**v-on** 调用传参 **filter** 过滤 覆盖修改原数组  
+**v-on** 调用传参 **filter** 过滤 覆盖修改原数组。
 ```javascript
 this.list = this.list.filter(item => item.id !== id)
 ```
